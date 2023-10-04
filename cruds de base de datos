@@ -1,0 +1,81 @@
+CREATE TABLE Clientes (
+    IdCliente INT PRIMARY KEY IDENTITY(1,1),
+    Nombre NVARCHAR(255) NOT NULL,
+    TipoCliente INT NOT NULL,
+    Carrera NVARCHAR(255),
+    F_Registro DATE,
+    Estado BIT
+);
+INSERT INTO Clientes (Nombre, TipoCliente, Carrera, F_Registro, Estado)
+VALUES ('Nombre del Cliente', 1, 'Carrera del Cliente', '2023-10-04', 1);
+-- Leer todos los clientes
+SELECT * FROM Clientes;
+
+-- Leer un cliente específico por su IdCliente
+SELECT * FROM Clientes WHERE IdCliente = 1;
+-- Actualizar el nombre de un cliente específico
+UPDATE Clientes SET Nombre = 'Nuevo Nombre' WHERE IdCliente = 1;
+
+-- Actualizar el estado de un cliente específico
+UPDATE Clientes SET Estado = 0 WHERE IdCliente = 1;
+-- Eliminar un cliente específico por su IdCliente
+DELETE FROM Clientes WHERE IdCliente = 1;
+
+
+CREATE TABLE Empleados (
+    Identificador INT PRIMARY KEY IDENTITY(1,1),
+    Nombre NVARCHAR(255) NOT NULL,
+    Cedula NVARCHAR(20) NOT NULL,
+    TandaLabor NVARCHAR(50) NOT NULL,
+    FechaIngreso DATE,
+    Estado BIT
+);
+INSERT INTO Empleados (Nombre, Cedula, TandaLabor, FechaIngreso, Estado)
+VALUES ('Nombre del Empleado', '1234567890', 'Mañana', '2023-10-04', 1);
+-- Leer todos los empleados
+SELECT * FROM Empleados;
+
+-- Leer un empleado específico por su Identificador
+SELECT * FROM Empleados WHERE Identificador = 1;
+-- Actualizar el nombre de un empleado específico
+UPDATE Empleados SET Nombre = 'Nuevo Nombre' WHERE Identificador = 1;
+
+-- Actualizar la tanda laboral de un empleado específico
+UPDATE Empleados SET TandaLabor = 'Tarde' WHERE Identificador = 1;
+
+-- Actualizar el estado de un empleado específico
+UPDATE Empleados SET Estado = 0 WHERE Identificador = 1;
+-- Eliminar un empleado específico por su Identificador
+DELETE FROM Empleados WHERE Identificador = 1;
+
+CREATE TABLE MovimientosCaja (
+    NoMovimiento INT PRIMARY KEY IDENTITY(1,1),
+    Empleado NVARCHAR(255) NOT NULL,
+    Cliente NVARCHAR(255),
+    Servicio NVARCHAR(255),
+    TipoDocumento NVARCHAR(50) NOT NULL,
+    FormaPago NVARCHAR(50) NOT NULL,
+    FechaMovimiento DATE,
+    Monto DECIMAL(10, 2) NOT NULL,
+    Estado BIT
+);
+INSERT INTO MovimientosCaja (Empleado, Cliente, Servicio, TipoDocumento, FormaPago, FechaMovimiento, Monto, Estado)
+VALUES ('Nombre del Empleado', 'Nombre del Cliente', 'Descripción del Servicio', 'Factura', 'Efectivo', '2023-10-04', 100.00, 1);
+-- Leer todos los movimientos en caja
+SELECT * FROM MovimientosCaja;
+
+-- Leer un movimiento en caja específico por su NoMovimiento
+SELECT * FROM MovimientosCaja WHERE NoMovimiento = 1;
+-- Actualizar el empleado de un movimiento en caja específico
+UPDATE MovimientosCaja SET Empleado = 'Nuevo Empleado' WHERE NoMovimiento = 1;
+
+-- Actualizar el cliente de un movimiento en caja específico
+UPDATE MovimientosCaja SET Cliente = 'Nuevo Cliente' WHERE NoMovimiento = 1;
+
+-- Actualizar el monto de un movimiento en caja específico
+UPDATE MovimientosCaja SET Monto = 150.00 WHERE NoMovimiento = 1;
+
+-- Actualizar el estado de un movimiento en caja específico
+UPDATE MovimientosCaja SET Estado = 0 WHERE NoMovimiento = 1;
+-- Eliminar un movimiento en caja específico por su NoMovimiento
+DELETE FROM MovimientosCaja WHERE NoMovimiento = 1;
