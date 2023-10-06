@@ -49,7 +49,10 @@
                th:descripcion required>
         <br>
         <label class="form-label" for="estado">Estado:</label>
-        <input class="form-control" type="text" id="estado" name="estado" th:field="*{estado}" th:estado required>
+        <select class="form-control" id="estado" name="estado" th:field="*{estado}" required>
+            <option value="ACTIVO">Activo</option>
+            <option value="INACTIVO">Inactivo</option>
+        </select>
         <br>
         <input type="submit" value="Actualizar" class="btn btn-success">
     </form>

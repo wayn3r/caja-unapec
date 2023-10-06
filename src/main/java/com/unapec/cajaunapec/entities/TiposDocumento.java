@@ -13,17 +13,25 @@ public class TiposDocumento {
     @Column(name = "descripcion")
     private String descripcion;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "estado")
-    private String estado;
+    private Estado estado;
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(Estado estado) {
         this.estado = estado;
     }
 
+    public void remove(){
+        setEstado(Estado.INACTIVO);
+    }
+
+    public Boolean getEstaActivo() {
+        return estado == Estado.ACTIVO;
+    }
     public void setId(Long id) {
         this.id = id;
     }
@@ -36,7 +44,7 @@ public class TiposDocumento {
         return descripcion;
     }
 
-    public String getEstado() {
-        return estado;
+    public Estado getEstado() {
+        return estado   ;
     }
 }

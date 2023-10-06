@@ -47,7 +47,10 @@
         <input type="text" id="descripcion" name="descripcion" th:field="*{descripcion}" th:description required class="form-control">
         <br>
         <label for="estado" class="form-label">Estado:</label>
-        <input type="text" id="estado" name="estado" th:field="*{estado}" th:estado required class="form-control">
+        <select class="form-control" id="estado" name="estado" th:field="*{estado}" required>
+            <option value="ACTIVO">Activo</option>
+            <option value="INACTIVO">Inactivo</option>
+        </select>
         <br>
         <input type="submit" value="Guardar" class="btn btn-success">
     </form>

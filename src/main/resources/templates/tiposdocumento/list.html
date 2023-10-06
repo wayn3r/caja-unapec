@@ -40,6 +40,18 @@
 </nav>
 <main class="container mt-3">
     <h2>Lista de Tipos de Documento</h2>
+    <div class="d-flex justify-content-end">
+
+    <a th:href="${'/tiposdocumento?estado=' + (mostrarTodo ? 'ACTIVO' : 'INACTIVO')}" id="estadoLink">
+        <div class="form-check-reverse form-switch">
+            <input class="form-check-input" type="checkbox" role="checkbox" id="estado" th:onchange="estadoLink.click()"
+                   th:checked="${mostrarTodo}"/>
+            <label class="form-check-label" for="estado">
+                Mostrar inactivos
+            </label>
+        </div>
+    </a>
+    </div>
     <table class="table">
         <thead>
         <tr>
@@ -53,10 +65,10 @@
         <tr th:each="tipoDocumento : ${tiposDocumentoList}" class="align-middle">
             <td th:text="${tipoDocumento.id}"></td>
             <td th:text="${tipoDocumento.descripcion}"></td>
-            <td th:text="${tipoDocumento.estado}"></td>
+            <td th:text="${tipoDocumento.estado.toString().toLowerCase()}" class="text-capitalize"></td>
             <td>
                 <a class="btn btn-light" th:href="@{/tiposdocumento/{id}/edit(id=${tipoDocumento.id})}">Editar</a>
-                <a class="btn btn-danger" th:href="@{/tiposdocumento/{id}/delete(id=${tipoDocumento.id})}">Eliminar</a>
+                <a th:if="${tipoDocumento.getEstaActivo()}" class="btn btn-danger" th:href="@{/tiposdocumento/{id}/delete(id=${tipoDocumento.id})}" >Eliminar</a>
             </td>
         </tr>
         </tbody>
