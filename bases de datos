@@ -18,3 +18,20 @@ CREATE TABLE Empleados (
     FechaIngreso DATE,
     Estado VARCHAR(50)
 );
+CREATE TABLE ServiciosFacturablesUnapec (
+    Identificador INT AUTO_INCREMENT PRIMARY KEY,
+    Descripcion VARCHAR(255),
+    Estado VARCHAR(20)
+);
+CREATE TABLE RegistroMovimientosCaja (
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    NumeroMovimiento INT,
+    Empleado VARCHAR(255),
+    Cliente VARCHAR(255),
+    Servicio VARCHAR(255),
+    TipoDocumento VARCHAR(50),
+    FormaPago VARCHAR(50),
+    FechaMovimiento DATE,
+    Monto DECIMAL(10, 2),
+    Estado VARCHAR(20)
+);
