@@ -1,0 +1,112 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formas de Pago</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+        h1 {
+            margin: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #333;
+            color: #fff;
+        }
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        .btn-change {
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        .btn-cancel {
+            background-color: #FF5733;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Formas de Pago</h1>
+    </header>
+    <div class="container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Identificador</th>
+                    <th>Descripción</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Efectivo</td>
+                    <td>Activo</td>
+                    <td>
+                        <button class="btn-change" onclick="cambiarFormaPago(1)">Cambiar</button>
+                        <button class="btn-cancel" onclick="cancelarPago(1)">Cancelar</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Tarjeta de Crédito</td>
+                    <td>Activo</td>
+                    <td>
+                        <button class="btn-change" onclick="cambiarFormaPago(2)">Cambiar</button>
+                        <button class="btn-cancel" onclick="cancelarPago(2)">Cancelar</button>
+                    </td>
+                </tr>
+                <!-- Puedes agregar más filas aquí con más formas de pago -->
+            </tbody>
+        </table>
+    </div>
+    <script>
+        function cambiarFormaPago(identificador) {
+            // Aquí puedes agregar la lógica para cambiar la forma de pago
+            alert("Forma de pago cambiada para el identificador " + identificador);
+        }
+
+        function cancelarPago(identificador) {
+            // Aquí puedes agregar la lógica para cancelar el pago
+            alert("Pago cancelado para el identificador " + identificador);
+        }
+    </script>
+</body>
+</html>
