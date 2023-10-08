@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/tiposdocumento")
+@RequestMapping("/tipos-documento")
 public class TiposDocumentoController {
 
     @Autowired
@@ -27,23 +27,21 @@ public class TiposDocumentoController {
 
         model.addAttribute("tiposDocumentoList", tiposDocumentoList);
         model.addAttribute("mostrarTodo", mostrarTodo);
-        return "tiposdocumento/list";
+        return "tipos-documento/list";
     }
 
     // Vista para crear un nuevo tipo de documento
     @GetMapping("/new")
     public String mostrarFormularioNuevo(Model model) {
         model.addAttribute("tiposDocumento", new TiposDocumento());
-        return "tiposdocumento/create";
+        return "tipos-documento/create";
     }
 
     // Procesar la creación de un nuevo tipo de documento
     @PostMapping("/new")
     public String crearTiposDocumento(@ModelAttribute TiposDocumento tiposDocumento) {
         tiposDocumentoRepository.save(tiposDocumento);
-        System.out.println(tiposDocumento.getDescripcion());
-        System.out.println(tiposDocumento.getEstado());
-        return "redirect:/tiposdocumento/";
+        return "redirect:/tipos-documento/";
     }
 
     // Vista para editar un tipo de documento por su ID
@@ -52,10 +50,9 @@ public class TiposDocumentoController {
         TiposDocumento tiposDocumento = tiposDocumentoRepository.findById(id).orElse(null);
         if (tiposDocumento != null) {
             model.addAttribute("tiposDocumento", tiposDocumento);
-            model.addAttribute("tiposDocumento", tiposDocumento);
-            return "tiposdocumento/edit";
+            return "tipos-documento/edit";
         } else {
-            return "redirect:/tiposdocumento/";
+            return "redirect:/tipos-documento/";
         }
     }
 
@@ -64,7 +61,7 @@ public class TiposDocumentoController {
     public String actualizarTiposDocumento(@PathVariable Long id, @ModelAttribute TiposDocumento tiposDocumento) {
         tiposDocumento.setId(id);
         tiposDocumentoRepository.save(tiposDocumento);
-        return "redirect:/tiposdocumento/";
+        return "redirect:/tipos-documento/";
     }
 
     // Eliminar un tipo de documento por su ID
@@ -73,6 +70,6 @@ public class TiposDocumentoController {
         TiposDocumento tiposDocumento = tiposDocumentoRepository.findById(id).get();
         tiposDocumento.remove();
         tiposDocumentoRepository.save(tiposDocumento);
-        return "redirect:/tiposdocumento/";
+        return "redirect:/tipos-documento/";
     }
 }

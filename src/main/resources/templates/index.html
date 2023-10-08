@@ -8,38 +8,10 @@
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg px-4 fs-5">
-    <div class="container-fluid">
-        <a class="navbar-brand fs-2" th:href="@{/}">Caja Unapec</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/tiposdocumento/}">Tipos de Documento</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Servicios Facturables</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Formas de Pago</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Modalidades de Pago</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Clientes</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Empleados</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
+<header th:replace="~{header :: header}"></header>
 
-
+<main class="container">
+    <h1> Bienvenido a Caja Unapec</h1>
+</main>
 </body>
 </html>
