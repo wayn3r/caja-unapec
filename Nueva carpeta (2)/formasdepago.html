@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formas de Pago</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        select, button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Formas de Pago</h1>
+        <form id="paymentForm">
+            <label for="paymentType">Tipo de Pago:</label>
+            <select id="paymentType" name="paymentType">
+                <option value="Efectivo">Efectivo</option>
+                <option value="Tarjeta de Crédito">Tarjeta de Crédito</option>
+                <option value="Transferencia Bancaria">Transferencia Bancaria</option>
+                <option value="PayPal">PayPal</option>
+            </select>
+
+            <label for="installments">Cuotas:</label>
+            <input type="number" id="installments" name="installments" min="1" value="1">
+
+            <button type="submit">Guardar Pago</button>
+            <button type="button" id="cancelPayment">Cancelar Pago</button>
+        </form>
+    </div>
+
+    <script>
+        const paymentForm = document.getElementById("paymentForm");
+        const cancelPaymentButton = document.getElementById("cancelPayment");
+
+        paymentForm.addEventListener("submit", function(event) {
+            event.preventDefault();
+            const paymentType = document.getElementById("paymentType").value;
+            const installments = document.getElementById("installments").value;
+
+            // Aquí puedes realizar alguna acción con los datos, como enviarlos a un servidor o mostrarlos en la página.
+            alert(`Tipo de Pago: ${paymentType}\nCuotas: ${installments}`);
+        });
+
+        cancelPaymentButton.addEventListener("click", function() {
+            // Aquí puedes agregar la lógica para cancelar el pago.
+            alert("Pago cancelado");
+        });
+    </script>
+</body>
+</html>
