@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registro de Movimientos en Caja</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        button {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #555;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #333;
+            color: #fff;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+    </style>
+</head>
+<body>
+    <h1>Registro de Movimientos en Caja</h1>
+    <div class="container">
+        <h2>Registrar Movimiento</h2>
+        <form id="registroForm">
+            <label for="numMovimiento">No. Movimiento:</label>
+            <input type="text" id="numMovimiento" name="numMovimiento"><br>
+
+            <label for="empleado">Empleado:</label>
+            <input type="text" id="empleado" name="empleado"><br>
+
+            <label for="cliente">Cliente:</label>
+            <input type="text" id="cliente" name="cliente"><br>
+
+            <label for="servicio">Servicio:</label>
+            <input type="text" id="servicio" name="servicio"><br>
+
+            <label for="tipoDocumento">Tipo de Documento:</label>
+            <input type="text" id="tipoDocumento" name="tipoDocumento"><br>
+
+            <label for="formaPago">Forma de Pago:</label>
+            <select id="formaPago" name="formaPago">
+                <option value="Efectivo">Efectivo</option>
+                <option value="Tarjeta">Tarjeta de Crédito</option>
+                <option value="Cheque">Cheque</option>
+            </select><br>
+
+            <label for="fechaMovimiento">Fecha Movimiento:</label>
+            <input type="date" id="fechaMovimiento" name="fechaMovimiento"><br>
+
+            <label for="monto">Monto:</label>
+            <input type="text" id="monto" name="monto"><br>
+
+            <label for="estado">Estado:</label>
+            <input type="text" id="estado" name="estado"><br>
+
+            <button type="button" onclick="registrarMovimiento()">Registrar Movimiento</button>
+        </form>
+    </div>
+
+    <div class="container">
+        <h2>Consulta por Criterios</h2>
+        <form id="consultaForm">
+            <!-- Agrega aquí los campos de consulta por criterios -->
+        </form>
+
+        <h2>Reporte de Movimientos</h2>
+        <form id="reporteForm">
+            <!-- Agrega aquí los campos para generar el reporte -->
+        </form>
+
+        <table id="resultados">
+            <!-- Aquí se mostrarán los resultados de consultas y reportes -->
+        </table>
+    </div>
+
+    <script>
+        // Función para registrar un movimiento (simulación)
+        function registrarMovimiento() {
+            const numMovimiento = document.getElementById('numMovimiento').value;
+            const empleado = document.getElementById('empleado').value;
+            const cliente = document.getElementById('cliente').value;
+            const servicio = document.getElementById('servicio').value;
+            const tipoDocumento = document.getElementById('tipoDocumento').value;
+            const formaPago = document.getElementById('formaPago').value;
+            const fechaMovimiento = document.getElementById('fechaMovimiento').value;
+            const monto = document.getElementById('monto').value;
+            const estado = document.getElementById('estado').value;
+
+            // Simulación: Agregar el movimiento a una tabla de resultados
+            const resultados = document.getElementById('resultados');
+            const newRow = resultados.insertRow(-1);
+            const cells = [
+                newRow.insertCell(0),
+                newRow.insertCell(1),
+                newRow.insertCell(2),
+                newRow.insertCell(3),
+                newRow.insertCell(4),
+                newRow.insertCell(5),
+                newRow.insertCell(6),
+                newRow.insertCell(7),
+                newRow.insertCell(8)
+            ];
+            cells[0].innerHTML = numMovimiento;
+            cells[1].innerHTML = empleado;
+            cells[2].innerHTML = cliente;
+            cells[3].innerHTML = servicio;
+            cells[4].innerHTML = tipoDocumento;
+            cells[5].innerHTML = formaPago;
+            cells[6].innerHTML = fechaMovimiento;
+            cells[7].innerHTML = monto;
+            cells[8].innerHTML = estado;
+
+            // Limpiar el formulario después de registrar
+            document.getElementById('registroForm').reset();
+        }
+
+        // Agrega aquí las funciones para realizar consultas y generar reportes
+    </script>
+</body>
+</html>

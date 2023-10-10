@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gestión de Empleados</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        button {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #555;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #333;
+            color: #fff;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+    </style>
+</head>
+<body>
+    <h1>Gestión de Empleados</h1>
+    <div class="container">
+        <h2>Agregar Empleado</h2>
+        <form id="registroForm">
+            <label for="identificador">Identificador:</label>
+            <input type="text" id="identificador" name="identificador"><br>
+
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre"><br>
+
+            <label for="cedula">Cédula:</label>
+            <input type="text" id="cedula" name="cedula"><br>
+
+            <label for="tandaLabor">Tanda Labor:</label>
+            <select id="tandaLabor" name="tandaLabor">
+                <option value="Matutina">Matutina</option>
+                <option value="Vespertina">Vespertina</option>
+                <option value="Nocturna">Nocturna</option>
+            </select><br>
+
+            <label for="fechaIngreso">Fecha de Ingreso:</label>
+            <input type="date" id="fechaIngreso" name="fechaIngreso"><br>
+
+            <label for="estado">Estado:</label>
+            <input type="text" id="estado" name="estado"><br>
+
+            <button type="button" onclick="agregarEmpleado()">Agregar Empleado</button>
+        </form>
+    </div>
+
+    <div class="container">
+        <h2>Lista de Empleados</h2>
+        <table id="empleadosTable">
+            <thead>
+                <tr>
+                    <th>Identificador</th>
+                    <th>Nombre</th>
+                    <th>Cédula</th>
+                    <th>Tanda Labor</th>
+                    <th>Fecha Ingreso</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Aquí se mostrarán los empleados -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        const empleados = [];
+
+        function agregarEmpleado() {
+            const identificador = document.getElementById('identificador').value;
+            const nombre = document.getElementById('nombre').value;
+            const cedula = document.getElementById('cedula').value;
+            const tandaLabor = document.getElementById('tandaLabor').value;
+            const fechaIngreso = document.getElementById('fechaIngreso').value;
+            const estado = document.getElementById('estado').value;
+
+            const empleado = {
+                identificador,
+                nombre,
+                cedula,
+                tandaLabor,
+                fechaIngreso,
+                estado
+            };
+
+            empleados.push(empleado);
+            actualizarTablaEmpleados();
+            limpiarFormulario();
+        }
+
+        function eliminarEmpleado(index) {
+            empleados.splice(index, 1);
+            actualizarTablaEmpleados();
+        }
+
+        function actualizarTablaEmpleados() {
+            const empleadosTable = document.getElementById('empleadosTable').getElementsByTagName('tbody')[0];
+            empleadosTable.innerHTML = '';
+
+            for (let i = 0; i < empleados.length; i++) {
+                const empleado = empleados[i];
+                const row = empleadosTable.insertRow(i);
+                row.innerHTML = `
+                    <td>${empleado.identificador}</td>
+                    <td>${empleado.nombre}</td>
+                    <td>${empleado.cedula}</td>
+                    <td>${empleado.tandaLabor}</td>
+                    <td>${empleado.fechaIngreso}</td>
+                    <td>${empleado.estado}</td>
+                    <td><button onclick="eliminarEmpleado(${i})">Eliminar</button></td>
+                `;
+            }
+        }
+
+        function limpiarFormulario() {
+            document.getElementById('registroForm').reset();
+        }
+    </script>
+</body>
+</html>
+
