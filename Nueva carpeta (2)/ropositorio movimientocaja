@@ -1,0 +1,20 @@
+@Entity
+public class MovimientoCaja {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String noMovimiento;
+    private String empleado;
+    private String cliente;
+    private String servicio;
+    private String tipoDocumento;
+    private String formaPago;
+    private LocalDate fechaMovimiento;
+    private BigDecimal monto;
+    private String estado;
+
+    // Getters y setters
+}
+public interface MovimientoCajaRepository extends JpaRepository<MovimientoCaja, Long> {
+}
