@@ -18,3 +18,16 @@ public class MovimientoCaja {
 }
 public interface MovimientoCajaRepository extends JpaRepository<MovimientoCaja, Long> {
 }
+@Service
+public class MovimientoCajaService {
+    @Autowired
+    private MovimientoCajaRepository movimientoCajaRepository;
+
+    public List<MovimientoCaja> listarMovimientosCaja() {
+        return movimientoCajaRepository.findAll();
+    }
+
+    public MovimientoCaja agregarMovimientoCaja(MovimientoCaja movimientoCaja) {
+        return movimientoCajaRepository.save(movimientoCaja);
+    }
+}
