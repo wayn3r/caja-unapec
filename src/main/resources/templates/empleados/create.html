@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Crear Empleado</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body>
+
+<header th:replace="~{header :: header}"></header>
+<main class="container mt-3">
+
+    <h2>Crear Empleado</h2>
+    <form th:action="@{/empleados/new}" th:object="${empleado}" method="post">
+
+
+        <label for="nombre" class="form-label"> Nombre:</label>
+        <input type="text" id="nombre" name="nombre" th:field="*{nombre}" class="form-control" required><br>
+
+        <label for="cedula" class="form-label"> Cédula:</label>
+        <input type="text" id="cedula" name="cedula" th:field="*{cedula}" class="form-control" required><br>
+
+
+        <label for="tandaLabor" class="form-label">Tanda Labor:</label>
+        <select id="tandaLabor" name="tandaLabor" th:field="*{tandaLabor}" class="form-control" required>
+            <option value="MATUTINA">Matutina</option>
+            <option value="VESPERTINA">Vespertina</option>
+            <option value="NOCTURNA">Nocturna</option>
+        </select><br>
+
+        <label for="fechaIngreso" class="form-label">Fecha de Ingreso:</label>
+        <input  class="form-control" type="date" id="fechaIngreso" name="fechaIngreso" th:field="*{fechaIngreso}" required><br>
+
+
+        <label for="estado" class="form-label">Estado:</label>
+        <select class="form-control" id="estado" name="estado" th:field="*{estado}" required>
+            <option value="ACTIVO">Activo</option>
+            <option value="INACTIVO">Inactivo</option>
+        </select>
+        <br>
+
+        <input type="submit" value="Guardar" class="btn btn-success">
+    </form>
+    <a th:href="@{/empleados/}">Volver a la lista</a>
+</main>
+</body>
+</html>

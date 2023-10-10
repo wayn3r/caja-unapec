@@ -7,7 +7,7 @@ CREATE TABLE Clientes (
     Estado BIT
 );
 INSERT INTO Clientes (Nombre, TipoCliente, Carrera, F_Registro, Estado)
-VALUES ('Nombre del Cliente', 1, 'Carrera del Cliente', '2023-10-04', 1);
+VALUES ('Nombre del com.unapec.cajaunapec.entities.Cliente', 1, 'Carrera del com.unapec.cajaunapec.entities.Cliente', '2023-10-04', 1);
 -- Leer todos los clientes
 SELECT * FROM Clientes;
 
@@ -51,7 +51,7 @@ DELETE FROM Empleados WHERE Identificador = 1;
 CREATE TABLE MovimientosCaja (
     NoMovimiento INT PRIMARY KEY IDENTITY(1,1),
     Empleado NVARCHAR(255) NOT NULL,
-    Cliente NVARCHAR(255),
+    com.unapec.cajaunapec.entities.Cliente NVARCHAR(255),
     Servicio NVARCHAR(255),
     TipoDocumento NVARCHAR(50) NOT NULL,
     FormaPago NVARCHAR(50) NOT NULL,
@@ -59,8 +59,8 @@ CREATE TABLE MovimientosCaja (
     Monto DECIMAL(10, 2) NOT NULL,
     Estado BIT
 );
-INSERT INTO MovimientosCaja (Empleado, Cliente, Servicio, TipoDocumento, FormaPago, FechaMovimiento, Monto, Estado)
-VALUES ('Nombre del Empleado', 'Nombre del Cliente', 'Descripción del Servicio', 'Factura', 'Efectivo', '2023-10-04', 100.00, 1);
+INSERT INTO MovimientosCaja (Empleado, com.unapec.cajaunapec.entities.Cliente, Servicio, TipoDocumento, FormaPago, FechaMovimiento, Monto, Estado)
+VALUES ('Nombre del Empleado', 'Nombre del com.unapec.cajaunapec.entities.Cliente', 'Descripción del Servicio', 'Factura', 'Efectivo', '2023-10-04', 100.00, 1);
 -- Leer todos los movimientos en caja
 SELECT * FROM MovimientosCaja;
 
@@ -70,7 +70,7 @@ SELECT * FROM MovimientosCaja WHERE NoMovimiento = 1;
 UPDATE MovimientosCaja SET Empleado = 'Nuevo Empleado' WHERE NoMovimiento = 1;
 
 -- Actualizar el cliente de un movimiento en caja específico
-UPDATE MovimientosCaja SET Cliente = 'Nuevo Cliente' WHERE NoMovimiento = 1;
+UPDATE MovimientosCaja SET com.unapec.cajaunapec.entities.Cliente = 'Nuevo com.unapec.cajaunapec.entities.Cliente' WHERE NoMovimiento = 1;
 
 -- Actualizar el monto de un movimiento en caja específico
 UPDATE MovimientosCaja SET Monto = 150.00 WHERE NoMovimiento = 1;
@@ -197,7 +197,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sql = "INSERT INTO clientes (nombre, tipo_cliente, carrera, f_registro, estado) VALUES ('$nombre', '$tipo_cliente', '$carrera', '$f_registro', '$estado')";
 
     if ($conn->query($sql) === TRUE) {
-        echo "Cliente creado con éxito";
+        echo "com.unapec.cajaunapec.entities.Cliente creado con éxito";
     } else {
         echo "Error al crear el cliente: " . $conn->error;
     }
@@ -223,7 +223,7 @@ $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
-        echo "ID: " . $row["id"] . " - Nombre: " . $row["nombre"] . " - Tipo de Cliente: " . $row["tipo_cliente"] . " - Carrera: " . $row["carrera"] . " - Fecha de Registro: " . $row["f_registro"] . " - Estado: " . $row["estado"] . "<br>";
+        echo "ID: " . $row["id"] . " - Nombre: " . $row["nombre"] . " - Tipo de com.unapec.cajaunapec.entities.Cliente: " . $row["tipo_cliente"] . " - Carrera: " . $row["carrera"] . " - Fecha de Registro: " . $row["f_registro"] . " - Estado: " . $row["estado"] . "<br>";
     }
 } else {
     echo "No hay clientes registrados";
@@ -255,7 +255,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sql = "UPDATE clientes SET nombre='$nombre', tipo_cliente='$tipo_cliente', carrera='$carrera', f_registro='$f_registro', estado='$estado' WHERE id=$id";
 
     if ($conn->query($sql) === TRUE) {
-        echo "Cliente actualizado con éxito";
+        echo "com.unapec.cajaunapec.entities.Cliente actualizado con éxito";
     } else {
         echo "Error al actualizar el cliente: " . $conn->error;
     }
@@ -282,7 +282,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sql = "DELETE FROM clientes WHERE id=$id";
 
     if ($conn->query($sql) === TRUE) {
-        echo "Cliente eliminado con éxito";
+        echo "com.unapec.cajaunapec.entities.Cliente eliminado con éxito";
     } else {
         echo "Error al eliminar el cliente: " . $conn->error;
     }

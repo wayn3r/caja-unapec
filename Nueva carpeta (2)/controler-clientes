@@ -6,26 +6,26 @@ public class ClienteController {
 
     @GetMapping("/listar")
     public String listarClientes(Model model) {
-        List<Cliente> clientes = clienteRepository.findAll();
+        List<com.unapec.cajaunapec.entities.Cliente> clientes = clienteRepository.findAll();
         model.addAttribute("clientes", clientes);
         return "listarClientes";
     }
 
     @GetMapping("/nuevo")
     public String mostrarFormularioNuevo(Model model) {
-        model.addAttribute("cliente", new Cliente());
+        model.addAttribute("cliente", new com.unapec.cajaunapec.entities.Cliente());
         return "formularioCliente";
     }
 
     @PostMapping("/guardar")
-    public String guardarCliente(@ModelAttribute("cliente") Cliente cliente) {
+    public String guardarCliente(@ModelAttribute("cliente") com.unapec.cajaunapec.entities.Cliente cliente) {
         clienteRepository.save(cliente);
         return "redirect:/clientes/listar";
     }
 
     @GetMapping("/editar/{id}")
     public String mostrarFormularioEditar(@PathVariable Long id, Model model) {
-        Cliente cliente = clienteRepository.findById(id).orElse(null);
+        com.unapec.cajaunapec.entities.Cliente cliente = clienteRepository.findById(id).orElse(null);
         model.addAttribute("cliente", cliente);
         return "formularioCliente";
     }

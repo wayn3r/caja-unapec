@@ -2,15 +2,15 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Editar Servicio Facturable</title>
+    <title>Editar Modalidad de Pago</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 <body>
 <header th:replace="~{header :: header}"></header>
 <main class="container mt-3">
-    <h2>Editar Servicio Facturable</h2>
-    <form th:action="@{/servicios-factuables/{id}/edit(id=${servicioFacturable.id})}" th:object="${servicioFacturable}"
+    <h2>Editar Modalidad de Pago</h2>
+    <form th:action="@{/modalidades-pago/{id}/edit(id=${modalidadesPago.id})}" th:object="${modalidadesPago}"
           method="post">
         <input type="hidden" th:field="*{id}">
         <label class="form-label" for="descripcion">Descripción:</label>
@@ -25,7 +25,7 @@
         <br>
         <input type="submit" value="Actualizar" class="btn btn-success">
     </form>
-    <a th:href="@{/servicios-facturables/}">Volver a la lista</a>
+    <a th:href="@{/modalidades-pago/}">Volver a la lista</a>
 </main>
 </body>
 

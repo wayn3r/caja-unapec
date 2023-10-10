@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Crear Movimiento de Caja</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body>
+
+<header th:replace="~{header :: header}"></header>
+<main class="container mt-3 mb-4">
+
+    <h2>Crear Movimiento de Caja</h2>
+    <form th:action="@{/movimientos-caja/new}" th:object="${movimientoCaja}" method="post">
+
+
+        <label for="empleado" class="form-label">Empleado:</label>
+        <select id="empleado" name="empleado" th:field="*{empleado}" class="form-control" required>
+            <option value="">Seleccione un empleado</option>
+            <option th:each="empleado : ${empleadosList}"
+                    th:value="${empleado.id}" th:text="${empleado.nombre}">
+            </option>
+        </select>
+        <br>
+        <label for="cliente" class="form-label">Cliente:</label>
+        <select id="cliente" name="cliente" th:field="*{cliente}" class="form-control" required>
+            <option value="">Seleccione un cliente</option>
+            <option th:each="cliente : ${clientesList}"
+                    th:value="${cliente.idCliente}" th:text="${cliente.nombre}">
+            </option>
+        </select>
+        <br>
+        <label for="servicio" class="form-label">Servicio:</label>
+        <select id="servicio" name="servicio" th:field="*{servicio}" class="form-control" required>
+            <option value="">Seleccione un servicio</option>
+            <option th:each="servicio : ${serviciosList}"
+                    th:value="${servicio.id}" th:text="${servicio.descripcion}">
+            </option>
+        </select>
+        <br>
+        <label for="tipoDocumento" class="form-label">Tipo de Documento:</label>
+        <select id="tipoDocumento" name="tipoDocumento" th:field="*{tipoDocumento}" class="form-control" required>
+            <option value="">Seleccione un tipo de documento</option>
+            <option th:each="tipoDocumento : ${tiposDocumentoList}"
+                    th:value="${tipoDocumento.id}" th:text="${tipoDocumento.descripcion}">
+            </option>
+        </select>
+        <br>
+        <label for="formaPago" class="form-label">Forma de Pago:</label>
+        <select id="formaPago" name="formaPago" th:field="*{formaPago}" class="form-control" required>
+            <option value="">Seleccione una forma de pago</option>
+            <option th:each="formaPago : ${formasPagoList}"
+                    th:value="${formaPago.id}" th:text="${formaPago.descripcion}">
+            </option>
+        </select>
+        <br>
+
+        <label for="monto" class="form-label">Monto:</label>
+        <input class="form-control" type="number" id="monto" name="monto" th:field="*{monto}" required><br>
+
+    <div class="row mb-3">
+        <div class="col-6">
+            <label for="fechaMovimiento" class="form-label">Fecha de Movimiento:</label>
+            <input class="form-control" type="datetime-local" id="fechaMovimiento" name="fechaMovimiento"
+                   th:field="*{fechaMovimiento}" required>
+        </div>
+        <div class="col-6">
+            <label for="estado" class="form-label">Estado:</label>
+            <select class="form-control" id="estado" name="estado" th:field="*{estado}" required>
+                <option value="ACTIVO">Activo</option>
+                <option value="INACTIVO">Inactivo</option>
+            </select>
+        </div>
+    </div>
+
+        <input type="submit" value="Guardar" class="btn btn-success">
+    </form>
+    <a th:href="@{/movimientos-caja/}">Volver a la lista</a>
+</main>
+</body>
+</html>

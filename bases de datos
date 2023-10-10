@@ -1,7 +1,7 @@
 CREATE TABLE RegistroMovimientosCaja (
     IDMovimiento INT AUTO_INCREMENT PRIMARY KEY,
     Empleado VARCHAR(255),
-    Cliente VARCHAR(255),
+    com.unapec.cajaunapec.entities.Cliente VARCHAR(255),
     Servicio VARCHAR(255),
     TipoDocumento VARCHAR(50),
     FormaPago VARCHAR(50),
@@ -27,7 +27,7 @@ CREATE TABLE RegistroMovimientosCaja (
     ID INT AUTO_INCREMENT PRIMARY KEY,
     NumeroMovimiento INT,
     Empleado VARCHAR(255),
-    Cliente VARCHAR(255),
+    com.unapec.cajaunapec.entities.Cliente VARCHAR(255),
     Servicio VARCHAR(255),
     TipoDocumento VARCHAR(50),
     FormaPago VARCHAR(50),

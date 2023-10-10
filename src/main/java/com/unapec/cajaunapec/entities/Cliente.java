@@ -1,7 +1,8 @@
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+package com.unapec.cajaunapec.entities;
+
+import jakarta.persistence.*;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.time.LocalDate;
 
 @Entity
@@ -11,25 +12,21 @@ public class Cliente {
     private Long idCliente;
 
     private String nombre;
-    private int tipoCliente; // 1-Estudiante, 2-Empleado, 3-Profesor
+    private TiposCliente tipoCliente;
     private String carrera;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate fRegistro;
-    private String estado;
-
-    // Constructor vacío
-    public Cliente() {
-    }
-
-    // Constructor con parámetros
-    public Cliente(String nombre, int tipoCliente, String carrera, LocalDate fRegistro, String estado) {
-        this.nombre = nombre;
-        this.tipoCliente = tipoCliente;
-        this.carrera = carrera;
-        this.fRegistro = fRegistro;
-        this.estado = estado;
-    }
+    private Estado estado;
 
     // Getters y setters
+    public void remove(){
+        setEstado(Estado.INACTIVO);
+    }
+
+    public Boolean getEstaActivo() {
+        return estado == Estado.ACTIVO;
+    }
+
     public Long getIdCliente() {
         return idCliente;
     }
@@ -46,11 +43,11 @@ public class Cliente {
         this.nombre = nombre;
     }
 
-    public int getTipoCliente() {
+    public TiposCliente getTipoCliente() {
         return tipoCliente;
     }
 
-    public void setTipoCliente(int tipoCliente) {
+    public void setTipoCliente(TiposCliente tipoCliente) {
         this.tipoCliente = tipoCliente;
     }
 
@@ -70,11 +67,11 @@ public class Cliente {
         this.fRegistro = fRegistro;
     }
 
-    public String getEstado() {
+    public Estado getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(Estado estado) {
         this.estado = estado;
     }
 }

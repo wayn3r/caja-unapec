@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Movimientos de Caja</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body>
+<header th:replace="~{header :: header}"></header>
+<main class="container mt-3">
+    <h2>Lista de Movimientos de Caja</h2>
+    <div class="d-flex justify-content-end">
+
+        <a th:href="@{/movimientos-caja(estado=${mostrarTodo ? 'ACTIVO' : 'INACTIVO'})}" id="estadoLink">
+            <div class="form-check-reverse form-switch">
+                <input class="form-check-input" type="checkbox" role="checkbox" id="estado"
+                       th:onchange="estadoLink.click()"
+                       th:checked="${mostrarTodo}"/>
+                <label class="form-check-label" for="estado">
+                    Mostrar inactivos
+                </label>
+            </div>
+        </a>
+    </div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>No. Movimiento</th>
+            <th>Empleado</th>
+            <th>Cliente</th>
+            <th>Tipo de Documento</th>
+            <th>Forma de Pago</th>
+            <th>Fecha de Movimiento</th>
+            <th>Monto</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="movimientoCaja : ${movimientosCajaList}" class="align-middle">
+            <td th:text="${movimientoCaja.id}"></td>
+            <td th:text="${movimientoCaja.noMovimiento}"></td>
+            <td th:text="${movimientoCaja.empleado.nombre}"></td>
+            <td th:text="${movimientoCaja.cliente.nombre}"></td>
+            <td th:text="${movimientoCaja.tipoDocumento.descripcion}"></td>
+            <td th:text="${movimientoCaja.formaPago.descripcion}"></td>
+            <td th:text="${movimientoCaja.fechaMovimiento}"></td>
+            <td th:text="${movimientoCaja.monto}"></td>
+            <td th:text="${movimientoCaja.estado.toString().toLowerCase()}" class="text-capitalize"></td>
+            <td>
+                <a class="btn btn-light" th:href="@{/movimientos-caja/{id}/edit(id=${movimientoCaja.id})}">Editar</a>
+                <a th:if="${movimientoCaja.getEstaActivo()}" class="btn btn-danger"
+                   th:href="@{/movimientos-caja/{id}/delete(id=${movimientoCaja.id})}">Eliminar</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <a th:href="@{/movimientos-caja/new}" class="btn btn-primary">Crear Movimiento de Caja</a>
+</main>
+</body>
+</html>

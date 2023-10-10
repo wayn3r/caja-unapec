@@ -1,5 +1,5 @@
 @Entity
-public class Cliente {
+public class com.unapec.cajaunapec.entities.Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idCliente;
@@ -11,6 +11,6 @@ public class Cliente {
 
     // Getters y setters
 }
-public interface ClienteRepository extends JpaRepository<Cliente, Long> {
+public interface ClienteRepository extends JpaRepository<com.unapec.cajaunapec.entities.Cliente, Long> {
 }
 
