@@ -1,0 +1,30 @@
+@Entity
+public class Empleado {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String identificador;
+    private String nombre;
+    private String cedula;
+    private String tandaLabor;
+    private LocalDate fechaIngreso;
+    private String estado;
+
+    // Getters y setters
+}
+public interface EmpleadoRepository extends JpaRepository<Empleado, Long> {
+}
+@Service
+public class EmpleadoService {
+    @Autowired
+    private EmpleadoRepository empleadoRepository;
+
+    public List<Empleado> listarEmpleados() {
+        return empleadoRepository.findAll();
+    }
+
+    public Empleado agregarEmpleado(Empleado empleado) {
+        return empleadoRepository.save(empleado);
+    }
+}
