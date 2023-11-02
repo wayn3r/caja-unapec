@@ -12,31 +12,42 @@
 <main class="container mt-3">
 
     <h2>Crear Cliente</h2>
-    <form th:action="@{/clientes/new}" th:object="${cliente}" method="post">
+    <form th:action="@{/clientes/new}" th:object="${cliente}" method="post" novalidate="novalidate">
 
+        <div class="form-group pb-2">
+            <label for="nombre" class="form-label"> Nombre:</label>
+            <input type="text" id="nombre" name="nombre" th:field="*{nombre}" class="form-control" required>
+            <span class="text-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></span>
+        </div>
 
-        <label for="nombre" class="form-label"> Nombre:</label>
-        <input type="text" id="nombre" name="nombre" th:field="*{nombre}" class="form-control" required><br>
+        <div class="form-group pb-2">
+            <label for="tipoCliente" class="form-label">Tipo de Cliente:</label>
+            <select id="tipoCliente" name="tipoCliente" th:field="*{tipoCliente}" class="form-control" required>
+                <option value="ESTUDIANTE">Estudiante</option>
+                <option value="EMPLEADO">Empleado</option>
+                <option value="PROFESOR">Profesor</option>
+            </select>
+            <span class="text-danger" th:if="${#fields.hasErrors('tipoCliente')}" th:errors="*{tipoCliente}"></span>
+        </div>
 
-        <label for="tipoCliente" class="form-label">Tipo de Cliente:</label>
-        <select id="tipoCliente" name="tipoCliente" th:field="*{tipoCliente}" class="form-control" required>
-            <option value="ESTUDIANTE">Estudiante</option>
-            <option value="EMPLEADO">Empleado</option>
-            <option value="PROFESOR">Profesor</option>
-        </select><br>
-
-        <label for="carrera" class="form-label">Carrera:</label>
-        <input  class="form-control" type="text" id="carrera" name="carrera" th:field="*{carrera}" ><br>
-
-        <label for="fRegistro" class="form-label ">Fecha de Registro:</label>
-        <input  class="form-control" type="date" id="fRegistro" name="fRegistro" th:field="*{fRegistro}"><br>
-
-        <label for="estado" class="form-label">Estado:</label>
-        <select class="form-control" id="estado" name="estado" th:field="*{estado}" required>
-            <option value="ACTIVO">Activo</option>
-            <option value="INACTIVO">Inactivo</option>
-        </select>
-        <br>
+        <div class="form-group pb-2">
+            <label for="carrera" class="form-label">Carrera:</label>
+            <input class="form-control" type="text" id="carrera" name="carrera" th:field="*{carrera}">
+            <span class="text-danger" th:if="${#fields.hasErrors('carrera')}" th:errors="*{carrera}"></span>
+        </div>
+        <div class="form-group pb-2">
+            <label for="fRegistro" class="form-label ">Fecha de Registro:</label>
+            <input class="form-control" type="date" id="fRegistro" name="fRegistro" th:field="*{fRegistro}">
+            <span class="text-danger" th:if="${#fields.hasErrors('fRegistro')}" th:errors="*{fRegistro}"></span>
+        </div>
+        <div class="form-group pb-2">
+            <label for="estado" class="form-label">Estado:</label>
+            <select class="form-control" id="estado" name="estado" th:field="*{estado}" required>
+                <option value="ACTIVO">Activo</option>
+                <option value="INACTIVO">Inactivo</option>
+            </select>
+            <span class="text-danger" th:if="${#fields.hasErrors('estado')}" th:errors="*{estado}"></span>
+        </div>
 
         <input type="submit" value="Guardar" class="btn btn-success">
     </form>

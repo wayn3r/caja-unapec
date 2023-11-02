@@ -3,9 +3,11 @@ package com.unapec.cajaunapec.controllers;
 import com.unapec.cajaunapec.entities.Estado;
 import com.unapec.cajaunapec.entities.Cliente;
 import com.unapec.cajaunapec.repositories.ClienteRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -39,7 +41,11 @@ public class ClientesController {
 
     // Procesar la creación de un nuevo cliente
     @PostMapping("/new")
-    public String crearCliente(@ModelAttribute Cliente cliente) {
+    public String crearCliente(@ModelAttribute @Valid Cliente cliente, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("errors", bindingResult.getAllErrors());
+            return "clientes/create";
+        }
         clienteRepository.save(cliente);
         return "redirect:/clientes/";
     }

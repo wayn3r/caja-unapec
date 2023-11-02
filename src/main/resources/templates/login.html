@@ -9,7 +9,7 @@
 <body>
 <div class="login-container">
     <h2>Login</h2>
-    <form action="#" method="post">
+    <form th:action="@{/login}" method="post">
         <div class="input-container">
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" required>
@@ -20,7 +20,7 @@
         </div>
         <button type="submit">Login</button>
     </form>
-    <p>Don't have an account? <a href="registro.html">Register here</a></p>
+    <div>Don't have an account? <a href="registro.html">Register here</a></div>
 </div>
 </body>
 </html>
