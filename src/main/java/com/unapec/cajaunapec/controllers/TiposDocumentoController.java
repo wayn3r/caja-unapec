@@ -3,9 +3,11 @@ package com.unapec.cajaunapec.controllers;
 import com.unapec.cajaunapec.entities.Estado;
 import com.unapec.cajaunapec.entities.TiposDocumento;
 import com.unapec.cajaunapec.repositories.TiposDocumentoRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -39,7 +41,11 @@ public class TiposDocumentoController {
 
     // Procesar la creación de un nuevo tipo de documento
     @PostMapping("/new")
-    public String crearTiposDocumento(@ModelAttribute TiposDocumento tiposDocumento) {
+    public String crearTiposDocumento(@ModelAttribute("tiposDocumento") @Valid TiposDocumento tiposDocumento, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("errors", bindingResult.getAllErrors());
+            return "tipos-documento/create";
+        }
         tiposDocumentoRepository.save(tiposDocumento);
         return "redirect:/tipos-documento/";
     }
@@ -58,7 +64,11 @@ public class TiposDocumentoController {
 
     // Procesar la actualización de un tipo de documento
     @PostMapping("/{id}/edit")
-    public String actualizarTiposDocumento(@PathVariable Long id, @ModelAttribute TiposDocumento tiposDocumento) {
+    public String actualizarTiposDocumento(@PathVariable Long id, @ModelAttribute("tiposDocumento") @Valid TiposDocumento tiposDocumento, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("errors", bindingResult.getAllErrors());
+            return "tipos-documento/edit";
+        }
         tiposDocumento.setId(id);
         tiposDocumentoRepository.save(tiposDocumento);
         return "redirect:/tipos-documento/";

@@ -35,13 +35,17 @@
                     <li class="nav-item">
                         <a class="nav-link" th:href="@{/movimientos-caja/}">Movimiento de caja</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{/registro}">Registro de usuarios</a>
-                    </li>
+<!--                    <li class="nav-item">-->
+<!--                        <a class="nav-link" href="/registro">Registro de usuarios</a>-->
+<!--                    </li>-->
                 </ul>
-                <a th:href="@{/logout}">Cerrar Sesión</a>
+                <a class="btn btn-light d-block ms-auto" th:href="@{/logout}" >Cerrar Sesión</a>
             </div>
         </div>
     </nav>
+
+    <script  defer async>
+        document.querySelector("a[href='" + window.location.pathname + "']").classList.add('active');
+    </script>
 </header>
 

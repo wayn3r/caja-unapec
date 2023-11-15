@@ -41,7 +41,7 @@ public class ClientesController {
 
     // Procesar la creación de un nuevo cliente
     @PostMapping("/new")
-    public String crearCliente(@ModelAttribute @Valid Cliente cliente, BindingResult bindingResult, Model model) {
+    public String crearCliente(@ModelAttribute("cliente") @Valid Cliente cliente, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("errors", bindingResult.getAllErrors());
             return "clientes/create";
@@ -53,6 +53,7 @@ public class ClientesController {
     // Vista para editar un cliente por su ID
     @GetMapping("/{id}/edit")
     public String mostrarFormularioEditar(@PathVariable Long id, Model model) {
+
         Cliente cliente = clienteRepository.findById(id).orElse(null);
         if (cliente != null) {
             model.addAttribute("cliente", cliente);
@@ -64,7 +65,11 @@ public class ClientesController {
 
     // Procesar la actualización de un cliente
     @PostMapping("/{id}/edit")
-    public String actualizarCliente(@PathVariable Long id, @ModelAttribute Cliente cliente) {
+    public String actualizarCliente(@PathVariable Long id, @ModelAttribute("cliente") @Valid Cliente cliente, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("errors", bindingResult.getAllErrors());
+            return "clientes/edit";
+        }
         cliente.setIdCliente(id);
         clienteRepository.save(cliente);
         return "redirect:/clientes/";

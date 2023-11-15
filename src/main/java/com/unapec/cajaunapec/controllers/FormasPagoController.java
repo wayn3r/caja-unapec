@@ -3,9 +3,11 @@ package com.unapec.cajaunapec.controllers;
 import com.unapec.cajaunapec.entities.Estado;
 import com.unapec.cajaunapec.entities.FormaPago;
 import com.unapec.cajaunapec.repositories.FormasPagoRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -39,7 +41,13 @@ public class FormasPagoController {
 
     // Procesar la creación de una nueva forma de pago
     @PostMapping("/new")
-    public String crearFormaPago(@ModelAttribute FormaPago formasPago) {
+    public String crearFormaPago(@ModelAttribute("formasPago") @Valid FormaPago formasPago, BindingResult bindingResult, Model model) {
+
+        if (bindingResult.hasErrors()) {
+
+            model.addAttribute("errors", bindingResult.getAllErrors());
+            return "formas-pago/create";
+        }
         formasPagoRepository.save(formasPago);
         System.out.println(formasPago.getDescripcion());
         System.out.println(formasPago.getEstado());
@@ -60,7 +68,11 @@ public class FormasPagoController {
 
     // Procesar la actualización de una forma de pago
     @PostMapping("/{id}/edit")
-    public String actualizarFormaPago(@PathVariable Long id, @ModelAttribute FormaPago formasPago) {
+    public String actualizarFormaPago(@PathVariable Long id, @ModelAttribute("formasPago") @Valid FormaPago formasPago, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("errors", bindingResult.getAllErrors());
+            return "formas-pago/edit";
+        }
         formasPago.setId(id);
         formasPagoRepository.save(formasPago);
         return "redirect:/formas-pago/";

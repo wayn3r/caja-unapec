@@ -12,65 +12,79 @@
 <main class="container mt-3 mb-4">
 
     <h2>Crear Movimiento de Caja</h2>
-    <form th:action="@{/movimientos-caja/new}" th:object="${movimientoCaja}" method="post">
+    <form th:action="@{/movimientos-caja/new}" th:object="${movimientoCaja}" method="post" novalidate>
 
 
         <label for="empleado" class="form-label">Empleado:</label>
-        <select id="empleado" name="empleado" th:field="*{empleado}" class="form-control" required>
+        <select id="empleado" name="empleado" th:field="*{empleado}" class="form-select" required>
             <option value="">Seleccione un empleado</option>
             <option th:each="empleado : ${empleadosList}"
                     th:value="${empleado.id}" th:text="${empleado.nombre}">
             </option>
         </select>
+
+         <span class="text-danger" th:if="${#fields.hasErrors('empleado')}" th:errors="*{empleado}"></span>
         <br>
         <label for="cliente" class="form-label">Cliente:</label>
-        <select id="cliente" name="cliente" th:field="*{cliente}" class="form-control" required>
+        <select id="cliente" name="cliente" th:field="*{cliente}" class="form-select" required>
             <option value="">Seleccione un cliente</option>
             <option th:each="cliente : ${clientesList}"
                     th:value="${cliente.idCliente}" th:text="${cliente.nombre}">
             </option>
         </select>
+
+         <span class="text-danger" th:if="${#fields.hasErrors('cliente')}" th:errors="*{cliente}"></span>
         <br>
         <label for="servicio" class="form-label">Servicio:</label>
-        <select id="servicio" name="servicio" th:field="*{servicio}" class="form-control" required>
+        <select id="servicio" name="servicio" th:field="*{servicio}" class="form-select" required>
             <option value="">Seleccione un servicio</option>
             <option th:each="servicio : ${serviciosList}"
                     th:value="${servicio.id}" th:text="${servicio.descripcion}">
             </option>
         </select>
+
+         <span class="text-danger" th:if="${#fields.hasErrors('servicio')}" th:errors="*{servicio}"></span>
         <br>
         <label for="tipoDocumento" class="form-label">Tipo de Documento:</label>
-        <select id="tipoDocumento" name="tipoDocumento" th:field="*{tipoDocumento}" class="form-control" required>
+        <select id="tipoDocumento" name="tipoDocumento" th:field="*{tipoDocumento}" class="form-select" required>
             <option value="">Seleccione un tipo de documento</option>
             <option th:each="tipoDocumento : ${tiposDocumentoList}"
                     th:value="${tipoDocumento.id}" th:text="${tipoDocumento.descripcion}">
             </option>
         </select>
+
+         <span class="text-danger" th:if="${#fields.hasErrors('tipoDocumento')}" th:errors="*{tipoDocumento}"></span>
         <br>
         <label for="formaPago" class="form-label">Forma de Pago:</label>
-        <select id="formaPago" name="formaPago" th:field="*{formaPago}" class="form-control" required>
+        <select id="formaPago" name="formaPago" th:field="*{formaPago}" class="form-select" required>
             <option value="">Seleccione una forma de pago</option>
             <option th:each="formaPago : ${formasPagoList}"
                     th:value="${formaPago.id}" th:text="${formaPago.descripcion}">
             </option>
         </select>
+
+         <span class="text-danger" th:if="${#fields.hasErrors('formaPago')}" th:errors="*{formaPago}"></span>
         <br>
 
         <label for="monto" class="form-label">Monto:</label>
-        <input class="form-control" type="number" id="monto" name="monto" th:field="*{monto}" required><br>
+        <input class="form-control" type="number" id="monto" name="monto" th:field="*{monto}" required>
+         <span class="text-danger" th:if="${#fields.hasErrors('monto')}" th:errors="*{monto}"></span>
+        <br>
 
     <div class="row mb-3">
         <div class="col-6">
             <label for="fechaMovimiento" class="form-label">Fecha de Movimiento:</label>
             <input class="form-control" type="datetime-local" id="fechaMovimiento" name="fechaMovimiento"
                    th:field="*{fechaMovimiento}" required>
+            <span class="text-danger" th:if="${#fields.hasErrors('fechaMovimiento')}" th:errors="*{fechaMovimiento}"></span>
         </div>
         <div class="col-6">
             <label for="estado" class="form-label">Estado:</label>
-            <select class="form-control" id="estado" name="estado" th:field="*{estado}" required>
+            <select class="form-select" id="estado" name="estado" th:field="*{estado}" required>
                 <option value="ACTIVO">Activo</option>
                 <option value="INACTIVO">Inactivo</option>
             </select>
+            <span class="text-danger" th:if="${#fields.hasErrors('estado')}" th:errors="*{estado}"></span>
         </div>
     </div>
 

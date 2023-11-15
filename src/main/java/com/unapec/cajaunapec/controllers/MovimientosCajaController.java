@@ -3,9 +3,11 @@ package com.unapec.cajaunapec.controllers;
 import java.util.UUID;
 import com.unapec.cajaunapec.entities.*;
 import com.unapec.cajaunapec.repositories.*;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -57,7 +59,12 @@ public class MovimientosCajaController {
 
     // Procesar la creación de un nuevo movimientoCaja
     @PostMapping("/new")
-    public String crearMovimientoCaja(@ModelAttribute MovimientoCaja movimientoCaja) {
+    public String crearMovimientoCaja(@ModelAttribute("movimientoCaja") @Valid MovimientoCaja movimientoCaja, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("errors", bindingResult.getAllErrors());
+            setRelationalData(model);
+            return "movimientos-caja/create";
+        }
         movimientoCaja.setNoMovimiento(UUID.randomUUID().toString());
         movimientoCajaRepository.save(movimientoCaja);
         return "redirect:/movimientos-caja/";
@@ -78,7 +85,12 @@ public class MovimientosCajaController {
 
     // Procesar la actualización de un movimiento de caja
     @PostMapping("/{id}/edit")
-    public String actualizarMovimientoCaja(@PathVariable Long id, @ModelAttribute MovimientoCaja movimientoCaja) {
+    public String actualizarMovimientoCaja(@PathVariable Long id, @ModelAttribute("movimientoCaja") @Valid MovimientoCaja movimientoCaja, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            setRelationalData(model);
+            model.addAttribute("errors", bindingResult.getAllErrors());
+            return "movimientos-caja/edit";
+        }
         movimientoCaja.setId(id);
         movimientoCajaRepository.save(movimientoCaja);
         return "redirect:/movimientos-caja/";

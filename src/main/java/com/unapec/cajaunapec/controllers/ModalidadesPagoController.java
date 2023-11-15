@@ -3,9 +3,11 @@ package com.unapec.cajaunapec.controllers;
 import com.unapec.cajaunapec.entities.Estado;
 import com.unapec.cajaunapec.entities.ModalidadPago;
 import com.unapec.cajaunapec.repositories.ModalidadesPagoRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -39,7 +41,11 @@ public class ModalidadesPagoController {
 
     // Procesar la creación de una nueva modalidad de pago
     @PostMapping("/new")
-    public String crearModalidadPago(@ModelAttribute ModalidadPago modalidadesPago) {
+    public String crearModalidadPago(@ModelAttribute("modalidadesPago") @Valid ModalidadPago modalidadesPago, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("errors", bindingResult.getAllErrors());
+            return "modalidades-pago/create";
+        }
         modalidadesPagoRepository.save(modalidadesPago);
         System.out.println(modalidadesPago.getDescripcion());
         System.out.println(modalidadesPago.getEstado());
@@ -60,7 +66,11 @@ public class ModalidadesPagoController {
 
     // Procesar la actualización de una modalidad de pago
     @PostMapping("/{id}/edit")
-    public String actualizarModalidadPago(@PathVariable Long id, @ModelAttribute ModalidadPago modalidadesPago) {
+    public String actualizarModalidadPago(@PathVariable Long id, @ModelAttribute("modalidadesPago") @Valid ModalidadPago modalidadesPago, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("errors", bindingResult.getAllErrors());
+            return "modalidades-pago/edit";
+        }
         modalidadesPago.setId(id);
         modalidadesPagoRepository.save(modalidadesPago);
         return "redirect:/modalidades-pago/";

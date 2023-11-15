@@ -11,17 +11,21 @@
 <main class="container mt-3">
     <h2>Editar Modalidad de Pago</h2>
     <form th:action="@{/modalidades-pago/{id}/edit(id=${modalidadesPago.id})}" th:object="${modalidadesPago}"
-          method="post">
+          method="post" novalidate>
         <input type="hidden" th:field="*{id}">
         <label class="form-label" for="descripcion">Descripción:</label>
         <input class="form-control" type="text" id="descripcion" name="descripcion" th:field="*{descripcion}"
                th:descripcion required>
+
+        <span class="text-danger" th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}"></span>
         <br>
         <label class="form-label" for="estado">Estado:</label>
-        <select class="form-control" id="estado" name="estado" th:field="*{estado}" required>
+        <select class="form-select" id="estado" name="estado" th:field="*{estado}" required>
             <option value="ACTIVO">Activo</option>
             <option value="INACTIVO">Inactivo</option>
         </select>
+
+        <span class="text-danger" th:if="${#fields.hasErrors('estado')}" th:errors="*{estado}"></span>
         <br>
         <input type="submit" value="Actualizar" class="btn btn-success">
     </form>

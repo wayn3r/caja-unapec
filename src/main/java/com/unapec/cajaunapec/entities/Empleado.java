@@ -2,7 +2,11 @@ package com.unapec.cajaunapec.entities;
 
 import java.time.LocalDate;
 
+import com.unapec.cajaunapec.validations.Cedula;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -11,12 +15,24 @@ public class Empleado {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull(message = "El nombre no puede estar vacío")
+    @NotEmpty(message = "El nombre no puede estar vacío")
+    @Size(min = 3, max = 50, message = "El nombre debe tener entre 3 y 50 caracteres")
     private String nombre;
+
+    @NotNull(message = "La cedula no puede estar vacía")
+    @NotEmpty(message = "La cedula no puede estar vacía")
+    @Cedula(message = "La cedula no es válida")
     private String cedula;
+
+    @NotNull(message = "La tanda laboral no puede estar vacía")
     private TandasLabor tandaLabor;
 
+    @NotNull(message = "La fecha de ingreso no puede estar vacía")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate fechaIngreso;
+
+    @NotNull(message = "El estado no puede estar vacío")
     private Estado estado;
 
     public void remove(){

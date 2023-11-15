@@ -12,7 +12,7 @@
 <main class="container mt-3">
 
     <h2>Crear Cliente</h2>
-    <form th:action="@{/clientes/new}" th:object="${cliente}" method="post" novalidate="novalidate">
+    <form th:action="@{/clientes/new}" th:object="${cliente}" method="post" novalidate>
 
         <div class="form-group pb-2">
             <label for="nombre" class="form-label"> Nombre:</label>
@@ -22,7 +22,7 @@
 
         <div class="form-group pb-2">
             <label for="tipoCliente" class="form-label">Tipo de Cliente:</label>
-            <select id="tipoCliente" name="tipoCliente" th:field="*{tipoCliente}" class="form-control" required>
+            <select id="tipoCliente" name="tipoCliente" th:field="*{tipoCliente}" class="form-select" required>
                 <option value="ESTUDIANTE">Estudiante</option>
                 <option value="EMPLEADO">Empleado</option>
                 <option value="PROFESOR">Profesor</option>
@@ -42,7 +42,7 @@
         </div>
         <div class="form-group pb-2">
             <label for="estado" class="form-label">Estado:</label>
-            <select class="form-control" id="estado" name="estado" th:field="*{estado}" required>
+            <select class="form-select" id="estado" name="estado" th:field="*{estado}" required>
                 <option value="ACTIVO">Activo</option>
                 <option value="INACTIVO">Inactivo</option>
             </select>

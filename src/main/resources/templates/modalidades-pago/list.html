@@ -38,9 +38,9 @@
             <td th:text="${modalidadPago.descripcion}"></td>
             <td th:text="${modalidadPago.estado.toString().toLowerCase()}" class="text-capitalize"></td>
             <td>
-                <a class="btn btn-light" th:href="@{/templates/modalidades-pago/{id}/edit(id=${modalidadPago.id})}">Editar</a>
+                <a class="btn btn-light" th:href="@{/modalidades-pago/{id}/edit(id=${modalidadPago.id})}">Editar</a>
                 <a th:if="${modalidadPago.getEstaActivo()}" class="btn btn-danger"
-                   th:href="@{/templates/modalidades-pago/{id}/delete(id=${modalidadPago.id})}">Eliminar</a>
+                   th:href="@{/modalidades-pago/{id}/delete(id=${modalidadPago.id})}">Eliminar</a>
             </td>
         </tr>
         </tbody>

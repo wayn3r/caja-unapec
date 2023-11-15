@@ -1,10 +1,7 @@
 package com.unapec.cajaunapec.entities;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Past;
-import jakarta.validation.constraints.Size;
-import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
@@ -16,6 +13,7 @@ public class Cliente {
     private Long idCliente;
 
     @NotNull(message = "El nombre no puede estar vacío")
+    @NotEmpty(message = "El nombre no puede estar vacío")
     @Size(min = 3, max = 50, message = "El nombre debe tener entre 3 y 50 caracteres")
     private String nombre;
 
@@ -23,6 +21,7 @@ public class Cliente {
     private TiposCliente tipoCliente;
 
     @NotNull(message = "La carrera no puede estar vacía")
+    @NotEmpty(message = "La carrera no puede estar vacía")
     @Size(min = 3, max = 50, message = "La carrera debe tener entre 3 y 50 caracteres")
     private String carrera;
 

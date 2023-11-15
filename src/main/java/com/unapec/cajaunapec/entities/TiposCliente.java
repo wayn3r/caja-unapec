@@ -1,5 +1,5 @@
 package com.unapec.cajaunapec.entities;
 
-public enum     TiposCliente {
+public enum TiposCliente {
     ESTUDIANTE, EMPLEADO, PROFESOR
 }

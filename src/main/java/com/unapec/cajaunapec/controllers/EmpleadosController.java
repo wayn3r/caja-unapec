@@ -3,9 +3,11 @@ package com.unapec.cajaunapec.controllers;
 import com.unapec.cajaunapec.entities.Estado;
 import com.unapec.cajaunapec.entities.Empleado;
 import com.unapec.cajaunapec.repositories.EmpleadoRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -39,7 +41,11 @@ public class EmpleadosController {
 
     // Procesar la creación de un nuevo empleado
     @PostMapping("/new")
-    public String crearEmpleado(@ModelAttribute Empleado empleado) {
+    public String crearEmpleado(@ModelAttribute("empleado") @Valid Empleado empleado, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("errors", bindingResult.getAllErrors());
+            return "empleados/create";
+        }
         empleadoRepository.save(empleado);
         return "redirect:/empleados/";
     }
@@ -58,7 +64,12 @@ public class EmpleadosController {
 
     // Procesar la actualización de un empleado
     @PostMapping("/{id}/edit")
-    public String actualizarEmpleado(@PathVariable Long id, @ModelAttribute Empleado empleado) {
+    public String actualizarEmpleado(@PathVariable Long id, @ModelAttribute("empleado") @Valid Empleado empleado, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("errors", bindingResult.getAllErrors());
+            return "empleados/edit";
+        }
+
         empleado.setId(id);
         empleadoRepository.save(empleado);
         return "redirect:/empleados/";

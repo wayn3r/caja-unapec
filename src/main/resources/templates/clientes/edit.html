@@ -11,30 +11,39 @@
 <main class="container mt-3">
     <h2>Editar Cliente</h2>
     <form th:action="@{/clientes/{id}/edit(id=${cliente.idCliente})}" th:object="${cliente}"
-          method="post">
+          method="post" novalidate>
         <input type="hidden" th:field="*{idCliente}">
 
         <label for="nombre" class="form-label"> Nombre:</label>
-        <input type="text" id="nombre" name="nombre" th:field="*{nombre}" class="form-control" required><br>
+        <input type="text" id="nombre" name="nombre" th:field="*{nombre}" class="form-control" required>
+        <span class="text-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></span>
+        <br>
 
         <label for="tipoCliente" class="form-label">Tipo de Cliente:</label>
-        <select id="tipoCliente" name="tipoCliente" th:field="*{tipoCliente}" class="form-control" required>
+        <select id="tipoCliente" name="tipoCliente" th:field="*{tipoCliente}" class="form-select" required>
             <option value="ESTUDIANTE">Estudiante</option>
             <option value="EMPLEADO">Empleado</option>
             <option value="PROFESOR">Profesor</option>
-        </select><br>
+        </select>
+        <span class="text-danger" th:if="${#fields.hasErrors('tipoCliente')}" th:errors="*{tipoCliente}"></span>
+        <br>
 
         <label for="carrera" class="form-label">Carrera:</label>
-        <input  class="form-control" type="text" id="carrera" name="carrera" th:field="*{carrera}" ><br>
+        <input  class="form-control" type="text" id="carrera" name="carrera" th:field="*{carrera}" >
+        <span class="text-danger" th:if="${#fields.hasErrors('carrera')}" th:errors="*{carrera}"></span>
+        <br>
 
         <label for="fRegistro" class="form-label">Fecha de Registro:</label>
-        <input  class="form-control" type="date" id="fRegistro" name="fRegistro"  th:field="*{fRegistro}" ><br>
+        <input  class="form-control" type="date" id="fRegistro" name="fRegistro"  th:field="*{fRegistro}" >
+        <span class="text-danger" th:if="${#fields.hasErrors('fRegistro')}" th:errors="*{fRegistro}"></span>
+        <br>
 
         <label class="form-label" for="estado">Estado:</label>
-        <select class="form-control" id="estado" name="estado" th:field="*{estado}" required>
+        <select class="form-select" id="estado" name="estado" th:field="*{estado}" required>
             <option value="ACTIVO">Activo</option>
             <option value="INACTIVO">Inactivo</option>
         </select>
+        <span class="text-danger" th:if="${#fields.hasErrors('estado')}" th:errors="*{estado}"></span>
         <br>
         <input type="submit" value="Actualizar" class="btn btn-success">
     </form>

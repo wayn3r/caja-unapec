@@ -1,6 +1,9 @@
 package com.unapec.cajaunapec.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "servicios_facturables")
@@ -11,10 +14,14 @@ public class ServicioFacturable {
     private Long id;
 
     @Column(name = "descripcion")
+    @NotNull(message = "La descripción no puede estar vacía")
+    @NotEmpty(message = "La descripción no puede estar vacía")
+    @Size(max = 50, message = "La descripción no puede tener más de 50 caracteres")
     private String descripcion;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "estado")
+    @NotNull(message = "El estado no puede estar vacío")
     private Estado estado;
 
     public void setDescripcion(String descripcion) {

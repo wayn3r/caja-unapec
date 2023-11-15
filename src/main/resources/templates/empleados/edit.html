@@ -11,31 +11,39 @@
 <main class="container mt-3">
     <h2>Editar Empleado</h2>
     <form th:action="@{/empleados/{id}/edit(id=${empleado.id})}" th:object="${empleado}"
-          method="post">
+          method="post" novalidate>
         <input type="hidden" th:field="*{id}">
 
         <label for="nombre" class="form-label"> Nombre:</label>
-        <input type="text" id="nombre" name="nombre" th:field="*{nombre}" class="form-control" required><br>
+        <input type="text" id="nombre" name="nombre" th:field="*{nombre}" class="form-control" required> <span
+            class="text-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></span>
+        <br>
 
         <label for="cedula" class="form-label"> Cédula:</label>
-        <input type="text" id="cedula" name="cedula" th:field="*{cedula}" class="form-control" required><br>
+        <input type="text" id="cedula" name="cedula" th:field="*{cedula}" class="form-control" required> <span
+            class="text-danger" th:if="${#fields.hasErrors('cedula')}" th:errors="*{cedula}"></span>
+        <br>
 
 
         <label for="tandaLabor" class="form-label">Tanda Labor:</label>
-        <select id="tandaLabor" name="tandaLabor" th:field="*{tandaLabor}" class="form-control" required>
+        <select id="tandaLabor" name="tandaLabor" th:field="*{tandaLabor}" class="form-select" required>
             <option value="MATUTINA">Matutina</option>
             <option value="VESPERTINA">Vespertina</option>
             <option value="NOCTURNA">Nocturna</option>
-        </select><br>
+        </select> <span class="text-danger" th:if="${#fields.hasErrors('tandaLabor')}" th:errors="*{tandaLabor}"></span>
+        <br>
 
         <label for="fechaIngreso" class="form-label">Fecha de Ingreso:</label>
-        <input  class="form-control" type="date" id="fechaIngreso" name="fechaIngreso"  th:field="*{fechaIngreso}" required ><br>
+        <input class="form-control" type="date" id="fechaIngreso" name="fechaIngreso" th:field="*{fechaIngreso}"
+               required> <span class="text-danger" th:if="${#fields.hasErrors('fechaIngreso')}" th:errors="*{fechaIngreso}"></span>
+        <br>
 
         <label class="form-label" for="estado">Estado:</label>
-        <select class="form-control" id="estado" name="estado" th:field="*{estado}" required>
+        <select class="form-select" id="estado" name="estado" th:field="*{estado}" required>
             <option value="ACTIVO">Activo</option>
             <option value="INACTIVO">Inactivo</option>
         </select>
+        <span class="text-danger" th:if="${#fields.hasErrors('estado')}" th:errors="*{estado}"></span>
         <br>
         <input type="submit" value="Actualizar" class="btn btn-success">
     </form>
