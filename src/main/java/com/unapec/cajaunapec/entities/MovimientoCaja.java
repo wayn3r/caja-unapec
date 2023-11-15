@@ -1,6 +1,7 @@
 package com.unapec.cajaunapec.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -41,8 +42,13 @@ public class MovimientoCaja {
     private FormaPago formaPago;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    @NotNull(message = "La fecha de movimiento no puede estar vacía")
     private LocalDateTime fechaMovimiento;
+    @NotNull(message = "El monto no puede estar vacío")
+    @Min(value = 1, message = "El monto debe ser mayor a 0")
     private Long monto;
+
+    @NotNull(message = "El estado no puede estar vacío")
     private Estado estado;
 
     public void remove() {
